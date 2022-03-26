@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>JS Drum Kit</title>
+    <title>DRUM KIT FOR BIG KIDS</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -66,6 +66,20 @@
         audio.play();
       }
 
+      function playOnClick(e) {
+        const audio = document.querySelector(
+          `audio[data-key="${e.target.dataset.key}"]`
+        );
+        const key = document.querySelector(
+          `div[data-key="${e.target.dataset.key}"]`
+        );
+        if (!audio) return;
+
+        key.classList.add("playing");
+        audio.currentTime = 0;
+        audio.play();
+      }
+
       function removeTransition(e) {
         if (e.propertyName !== "transform") return;
         e.target.classList.remove("playing");
@@ -76,6 +90,7 @@
         key.addEventListener("transitionend", removeTransition)
       );
       window.addEventListener("keydown", playSound);
+      window.addEventListener("click", playOnClick);
     </script>
   </body>
 </html>
